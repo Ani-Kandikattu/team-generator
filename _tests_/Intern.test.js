@@ -6,7 +6,7 @@ describe("Intern", () => {
     it("should create an intern object", () => {
       const intern = new Intern();
 
-      expect;
+      expect(intern.school).toEqual(expect.any(String));
     });
   });
 });

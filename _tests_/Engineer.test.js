@@ -6,7 +6,7 @@ describe("Engineer", () => {
     it("should create an engineer object", () => {
       const engineer = new Engineer();
 
-      expect;
+      expect(engineer.github).toEqual(expect.any(String));
     });
   });
 });
