@@ -11,4 +11,12 @@ describe("Employee", () => {
       expect(employee.email).toEqual(expect.any(String));
     });
   });
+  
+  describe("getName", () => {
+    it("should return the employee's name", () => {
+      const employee = new Employee('Name', 1234, 'employee@mail.com');
+
+      expect(employee.getName()).toEqual('Name');
+    });
+  });
 });
