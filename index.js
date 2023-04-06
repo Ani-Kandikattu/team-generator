@@ -80,7 +80,7 @@ const createEmployees = () => {
   {
     type: "input",
     name: "name",
-    message: "Enter the manager's name:",
+    message: "Enter the employee's name:",
     validate: (input) => {
       if (/^[a-zA-Z]+$/.test(input)) {
         return true;
@@ -93,7 +93,7 @@ const createEmployees = () => {
   {
     type: "input",
     name: "id",
-    message: "Enter the manager's ID:",
+    message: "Enter the employee's ID:",
     validate: (input) => {
       if (/^\d+$/.test(input)) {
         return true;
@@ -106,7 +106,7 @@ const createEmployees = () => {
   {
     type: "input",
     name: "email",
-    message: "Enter the manager's email:",
+    message: "Enter the employee's email:",
     validate: (input) => {
       if (/\S+@\S+\.\S+/.test(input)) {
         return true;
@@ -119,8 +119,51 @@ const createEmployees = () => {
   {
     type: "input",
     name: "github",
-    message: "Enter the employee's github: "
+    message: "Enter the employee's github: ",
+    when: (input) => input.role === "Engineer",
+    validate: (input) => {
+      if (input) {
+        return true;
+      } else {
+        console.log('Input is not valid!');
+        return false;
+      }
+    }
+  },
+  {
+    type: "input",
+    name: "school",
+    message: "Enter the employee's school: ",
+    when: (input) => input.role === "Intern",
+    validate: (input) => {
+      if(input) {
+        return true;
+      } else {
+        console.log("Input is not valid!");
+        return false;
+      }
+    }
+  },
+  {
+    type: "confirm",
+    name: "anotherEmployee",
+    message: "Add another employee?",
   }
-
   ])
+  .then(employeeInput => {
+    const {name, id, email, role, github, school, anotherEmplyoee} = employeeInput;
+
+    if(role === "Engineer") {
+      employees.push(new Engineer(name, id, email, github));
+
+    } else if (role === "Intern") {
+      employees.push(new Intern(name, id, email, school));
+    }
+
+    if(anotherEmplyoee) {
+      return createEmployees();
+    } else {
+      return employees;
+    }
+  })
 }
