@@ -171,22 +171,22 @@ const createEmployees = () => {
     });
 };
 
-const writeFile = data => {
-  fs.writeFile('./dist/index.html', data, err => {
-    if(err) {
-      console.log(err)
+const writeFile = (data) => {
+  fs.writeFile("./dist/index.html", data, (err) => {
+    if (err) {
+      console.log(err);
       return;
     } else {
-      console.log("Successfully created team!")
+      console.log("Successfully created team!");
     }
-  })
-}
+  });
+};
 
 createManager()
-.then(createEmployees)
-.then(employees => {
-  return generateHTML(employees);
-})
-.then(generatedHTML => {
-  return writeFile(generatedHTML);
-})
+  .then(createEmployees)
+  .then((employees) => {
+    return generateHTML(employees);
+  })
+  .then((generatedHTML) => {
+    return writeFile(generatedHTML);
+  });
